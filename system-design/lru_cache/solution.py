@@ -10,20 +10,43 @@ class Node(object):
 
 class LinkedList(object):
     def __init__(self):
-        self.haed = None
+        self.head = None
         self.tail = None
 
 
     def move_to_front(self, node):
-        pass
+        if self.head == self.tail:
+            pass
+
+        if node is self.tail:
+            self.tail = self.tail.prev
+            node.next = self.head
+            self.head = node
+
+        elif node is not self.head:
+            node.prev.next = node.next
+            node.next = self.head
+            self.head = node
 
 
     def append_to_front(self, node):
-        pass
+        if self.head is None:
+            self.head = node
+            self.tail = node
+        
+        else:
+            self.head.prev = node
+            node.next = self.head
+            self.head = node
 
 
-    def remove_to_tail(self, node):
-        pass
+    def remove_to_tail(self):
+        if self.tail is None:
+            pass
+        
+        else:
+            self.tail.prev.next = None
+            self.tail =  self.tail.prev
 
 
 
@@ -44,7 +67,8 @@ class Cache(object):
         
         else:
             if self.size == self.max_size:
-                self.lookup.pop(self.linked_list.tail.query, None)
+                print("OK")
+                self.lookup.pop(query, None)
                 self.linked_list.remove_to_tail()
 
             else:
@@ -65,4 +89,58 @@ class Cache(object):
 
         else:
             return None
+
+
+
+if __name__ == '__main__':
+    cache = Cache(3)
+    
+    cache.set("test1", "TEST1")
+    print("cahce.linked_list", cache.linked_list.head.results, cache.linked_list.tail.results)
+    print("set test1 as TEST1")
+
+    cache.set("test2", "TEST2")
+    print("set test2 as TEST2")
+    print("cahce.linked_list", cache.linked_list.head.results, cache.linked_list.tail.results)
+    
+    cache.set("test3", "TEST3")
+    print("set test3 as TEST3")
+
+    cache.set("test4", "TEST4")
+    print("set test4 as TEST4")
+
+    print(cache.get("test2"))
+    print("cahce.linked_list", cache.linked_list.head.results, cache.linked_list.tail.results)
+    print("cahce.linked_list", cache.linked_list.head.next.results, cache.linked_list.tail.results)
+    print("cahce.linked_list", cache.linked_list.head.next.next.results, cache.linked_list.tail.results)
+    print()
+    print("cahce.linked_list", cache.linked_list.head.next.next.next.results, cache.linked_list.tail.results)
+    print("cahce.linked_list", cache.linked_list.head.next.next.next.next.results, cache.linked_list.tail.results)
+    print("cahce.linked_list", cache.linked_list.head.next.next.next.next.next.results, cache.linked_list.tail.results)
+
+    cache.set("test5", "TEST5")
+    print("cahce.linked_list", cache.linked_list.head.results, cache.linked_list.tail.results)
+    print("cahce.linked_list", cache.linked_list.head.next.results, cache.linked_list.tail.results)
+    print("cahce.linked_list", cache.linked_list.head.next.next.results, cache.linked_list.tail.results)
+    
+    cache.set("test6", "TEST6")
+    print("cahce.linked_list", cache.linked_list.head.results, cache.linked_list.tail.results)
+    print("cahce.linked_list", cache.linked_list.head.next.results, cache.linked_list.tail.results)
+    print("cahce.linked_list", cache.linked_list.head.next.next.results, cache.linked_list.tail.results)
+
+    cache.set("test7", "TEST7")
+    print("cahce.linked_list", cache.linked_list.head.results, cache.linked_list.tail.results)
+    
+    print("cahce.linked_list", cache.linked_list.head.results, cache.linked_list.tail.results)
+    print("cahce.linked_list", cache.linked_list.head.next.results, cache.linked_list.tail.results)
+    print("cahce.linked_list", cache.linked_list.head.next.next.results, cache.linked_list.tail.results)
+    print()
+    print("cahce.linked_list", cache.linked_list.head.next.next.next.results, cache.linked_list.tail.results)
+    print("cahce.linked_list", cache.linked_list.head.next.next.next.next.results, cache.linked_list.tail.results)
+    print("cahce.linked_list", cache.linked_list.head.next.next.next.next.next.results, cache.linked_list.tail.results)
+
+
+    print(cache.get("test3"))
+    print(cache.get("test4"))
+    print(cache.get("test1"))
 
