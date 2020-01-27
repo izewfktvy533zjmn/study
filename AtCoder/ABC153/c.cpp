@@ -3,24 +3,11 @@
 using namespace std;
 
 int main() {
-    int n, k;
-    cin >> n >> k;
+    long long h;
+    cin >> h;
 
-    vector<long long> h(n);
-    for (int i=0; i<n; i++) {
-        cin >> h.at(i);
-    }
-    
-    sort(h.begin(), h.end());
-    reverse(h.begin(), h.end());
+    double n = floor(log2(h));
 
-    long long ret = 0;
-
-    for (int i=k; i<n; i++) {
-        ret += h.at(i);
-    }
-    
-    cout << ret << endl;
-
+    cout << (long long)pow(2, n+1)-1 << endl;
 }
 
